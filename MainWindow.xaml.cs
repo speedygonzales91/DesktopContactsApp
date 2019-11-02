@@ -24,5 +24,14 @@ namespace DesktopContactsApp
         {
             InitializeComponent();
         }
+
+        private void newContactsWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+            NewContactWindow newContactWindow = new NewContactWindow();
+            newContactWindow.Show();
+
+            //ShowDialog disables the user to click out
+            //newContactWindow.ShowDialog();
+        }
     }
 }
