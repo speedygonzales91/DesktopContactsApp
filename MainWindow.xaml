@@ -11,6 +11,23 @@
                 Content="Open"
                 Click="newContactsWindowButton_Click"></Button>
         <ListView x:Name="contactsListview"
-                  Margin="0,5,0,0"></ListView>
+                  Height="300"
+                  Margin="0,5,0,0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}"
+                               FontSize="20"
+                               FontWeight="Bold"></TextBlock>
+                        <TextBlock Text="{Binding PhoneNumber}"
+                               FontSize="10"
+                               Foreground="DarkRed"></TextBlock>
+                        <TextBlock Text="{Binding Email}"
+                               FontSize="10"
+                               Foreground="CadetBlue"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackPanel>
 </Window>
