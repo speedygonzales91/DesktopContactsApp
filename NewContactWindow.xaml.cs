@@ -43,13 +43,15 @@ namespace DesktopContactsApp
             //Create the final path
             string databasePath = System.IO.Path.Combine(foldername, databaseName);
 
-            //Connect to SQLite
-            SQLiteConnection connection = new SQLiteConnection(databasePath);
-            //Create Contact table. If it is already exists it will be skipped!
-            connection.CreateTable<Contact>();
-            //Insert the newly created object
-            connection.Insert(contact);
-
+            //Connect to SQLite --using can only use IDisposable interface descendants. Implements this interface.
+            using (SQLiteConnection connection = new SQLiteConnection(databasePath))
+            {
+                //Create Contact table. If it is already exists it will be skipped!
+                connection.CreateTable<Contact>();
+                //Insert the newly created object
+                connection.Insert(contact);
+            }
+            
             //Closing the form
             Close();
         }
