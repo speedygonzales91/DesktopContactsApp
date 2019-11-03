@@ -14,6 +14,7 @@
                  x:Name="filterTextBox"
                  TextChanged="filterTextBox_TextChanged"></TextBox>
         <ListView x:Name="contactsListview"
+                  SelectionChanged="contactsListview_SelectionChanged"
                   Height="300"
                   Margin="0,5,0,0">
             <ListView.ItemTemplate>
