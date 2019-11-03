@@ -43,10 +43,25 @@ namespace DesktopContactsApp
 
         void ReadDatabase()
         {
+            List<Contact> contacts;
             using (SQLiteConnection connection = new SQLiteConnection(App.databasePath))
             {
                 connection.CreateTable<Contact>();
-                var contact = connection.Table<Contact>().ToList();
+                contacts = connection.Table<Contact>().ToList();
+            }
+
+            if (contacts != null)
+            {
+                //foreach (var contact in contacts)
+                //{
+                //    contactsListview.Items.Add(new ListViewItem()
+                //    {
+                //        Content = contact
+                //    });
+                //}
+
+                //The above code is happening behind the scenes! but this one calls the clear on it to avoid duplicating elements!
+                contactsListview.ItemsSource = contacts;
             }
         }
     }
