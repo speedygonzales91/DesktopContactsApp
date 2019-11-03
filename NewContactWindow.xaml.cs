@@ -36,15 +36,8 @@ namespace DesktopContactsApp
                 Email = emailTextBox.Text
             };
 
-            //Set up database attributes
-            var databaseName = "Contacts.db";
-            //This will look for MyDocuments folder path
-            var foldername = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            //Create the final path
-            string databasePath = System.IO.Path.Combine(foldername, databaseName);
-
             //Connect to SQLite --using can only use IDisposable interface descendants. Implements this interface.
-            using (SQLiteConnection connection = new SQLiteConnection(databasePath))
+            using (SQLiteConnection connection = new SQLiteConnection(App.databasePath))
             {
                 //Create Contact table. If it is already exists it will be skipped!
                 connection.CreateTable<Contact>();
