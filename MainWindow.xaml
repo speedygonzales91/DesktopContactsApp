@@ -10,6 +10,9 @@
         <Button x:Name="newContactsWindowButton"
                 Content="Open"
                 Click="newContactsWindowButton_Click"></Button>
+        <TextBox Margin="0,5,0,5"
+                 x:Name="filterTextBox"
+                 TextChanged="filterTextBox_TextChanged"></TextBox>
         <ListView x:Name="contactsListview"
                   Height="300"
                   Margin="0,5,0,0">

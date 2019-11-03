@@ -22,9 +22,12 @@ namespace DesktopContactsApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Contact> contacts;
         public MainWindow()
         {
             InitializeComponent();
+
+            contacts = new List<Contact>();
 
             ReadDatabase();
         }
@@ -43,7 +46,6 @@ namespace DesktopContactsApp
 
         void ReadDatabase()
         {
-            List<Contact> contacts;
             using (SQLiteConnection connection = new SQLiteConnection(App.databasePath))
             {
                 connection.CreateTable<Contact>();
@@ -63,6 +65,13 @@ namespace DesktopContactsApp
                 //The above code is happening behind the scenes! but this one calls the clear on it to avoid duplicating elements!
                 contactsListview.ItemsSource = contacts;
             }
+        }
+
+        private void filterTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var filteredList = contacts.Where(c => c.Name.ToLower().Contains(filterTextBox.Text.ToLower()));
+
+            contactsListview.ItemsSource = filteredList;
         }
     }
 }
