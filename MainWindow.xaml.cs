@@ -49,7 +49,7 @@ namespace DesktopContactsApp
             using (SQLiteConnection connection = new SQLiteConnection(App.databasePath))
             {
                 connection.CreateTable<Contact>();
-                contacts = connection.Table<Contact>().ToList();
+                contacts = (connection.Table<Contact>().ToList()).OrderBy(c => c.Name).ToList();
             }
 
             if (contacts != null)
@@ -69,7 +69,15 @@ namespace DesktopContactsApp
 
         private void filterTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var filteredList = contacts.Where(c => c.Name.ToLower().Contains(filterTextBox.Text.ToLower()));
+            var filteredList = contacts.Where(c => c.Name.ToLower().Contains(filterTextBox.Text.ToLower())).OrderBy(c=>c.Name);
+
+            //The above LINQ works like this:
+            /*
+            var filteredList2 = from c2 in contacts
+                                where c2.Name.ToLower().Contains(filterTextBox.Text.ToLower())
+                                orderby c2.Name
+                                select c2;
+            */
 
             contactsListview.ItemsSource = filteredList;
         }
