@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DesktopContactsApp.Classes;
+using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,15 +25,29 @@ namespace DesktopContactsApp
         public MainWindow()
         {
             InitializeComponent();
+
+            ReadDatabase();
         }
 
         private void newContactsWindowButton_Click(object sender, RoutedEventArgs e)
         {
             NewContactWindow newContactWindow = new NewContactWindow();
-            newContactWindow.Show();
+            //newContactWindow.Show();
 
             //ShowDialog disables the user to click out
-            //newContactWindow.ShowDialog();
+            newContactWindow.ShowDialog();
+
+            //After showdialog() - close the form or presssed save button - it will be called!
+            ReadDatabase();
+        }
+
+        void ReadDatabase()
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(App.databasePath))
+            {
+                connection.CreateTable<Contact>();
+                var contact = connection.Table<Contact>().ToList();
+            }
         }
     }
 }
