@@ -10,14 +10,17 @@
         <StackPanel Margin="5">
             <TextBlock x:Name="nameTextBox"
                        Text="FirstName LastName"
+                       MinWidth="300"
                        FontSize="20"
                        FontWeight="Bold"></TextBlock>
             <TextBlock x:Name="phoneTextBox"
                        Text="06 1 222 22222"
+                       MinWidth="300"
                        FontSize="10"
                        Foreground="DarkRed"></TextBlock>
             <TextBlock x:Name="emailTextBox"
                        Text="zsolt@hungary.com"
+                       MinWidth="300"
                        FontSize="10"
                        Foreground="CadetBlue"></TextBlock>
         </StackPanel>

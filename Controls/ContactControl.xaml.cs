@@ -21,20 +21,30 @@ namespace DesktopContactsApp.Controls
     /// </summary>
     public partial class ContactControl : UserControl
     {
-        private Contact _contact;
+
+
 
         public Contact Contact
         {
-            get { return _contact; }
-            set 
-            { 
-                _contact = value;
-                nameTextBox.Text = Contact.Name;
-                phoneTextBox.Text = Contact.PhoneNumber;
-                emailTextBox.Text = Contact.Email;
-            }
+            get { return (Contact)GetValue(ContactProperty); }
+            set { SetValue(ContactProperty, value); }
         }
 
+        // Using a DependencyProperty as the backing store for Contact.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ContactProperty =
+            DependencyProperty.Register("Contact", typeof(Contact), typeof(ContactControl), new PropertyMetadata(null, SetText));
+
+        private static void SetText(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var control = d as ContactControl;
+
+            if (control != null)
+            {
+                control.nameTextBox.Text = (e.NewValue as Contact).Name;
+                control.phoneTextBox.Text = (e.NewValue as Contact).PhoneNumber;
+                control.emailTextBox.Text = (e.NewValue as Contact).Email;
+            }
+        }
 
         public ContactControl()
         {
