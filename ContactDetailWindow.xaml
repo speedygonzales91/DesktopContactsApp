@@ -20,7 +20,7 @@
                      Margin="0,0,0,5"></TextBox>
             <Button x:Name="updateButton"
                     Content="Update"
-                    Margin="0,0,0,5"></Button>
+                    Margin="0,0,0,5" Click="updateButton_Click"></Button>
             <Button x:Name="deleteButton"
                     Background="Red"
                     Foreground="White"
